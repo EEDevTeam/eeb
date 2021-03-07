@@ -55,3 +55,4 @@ Traceback (most recent call last):
     raise ConnectionClosed(self.ws, shard_id=None, code=self._close_code)
 discord.errors.ConnectionClosed: Shard ID None WebSocket closed with 4000
 2021-03-07 12:06:03,391:WARNING:discord.gateway: Can't keep up, shard ID None websocket is 39.5s behind.
+2021-03-07 17:22:35,863:WARNING:discord.gateway: Can't keep up, shard ID None websocket is 10.0s behind.

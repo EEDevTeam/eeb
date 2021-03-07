@@ -18,7 +18,7 @@ from discord.ext.commands import Bot
 import aiohttp
 import loadconfig
 
-__version__ = 'Beta 1'
+
 
 
 
@@ -90,7 +90,7 @@ async def on_ready():
     print(f'Bot-ID: {bot.user.id}')
     print(f'Dev Mode: {bot.dev}')
     print(f'Discord Version: {discord.__version__}')
-    print(f'Bot Version: {__version__}')
+    print(f'Bot Version: {loadconfig.__version__}')
     bot.AppInfo = await bot.application_info()
     print(f'Owner: {bot.AppInfo.owner}')
     print('------')
@@ -101,8 +101,8 @@ async def on_ready():
             print(f'Couldn\'t load cog {cog}')
     bot.commands_used = Counter()
     bot.startTime = time.time()
-    bot.botVersion = __version__
-    bot.userAgentHeaders = {'User-Agent': f'linux:shinobu_discordbot:v{__version__} (by Der-Eddy)'}
+    bot.botVersion = loadconfig.__version__
+    bot.userAgentHeaders = {'User-Agent': f'linux:shinobu_discordbot:v{loadconfig.__version__} (by Der-Eddy)'}
     bot.gamesLoop = asyncio.ensure_future(_randomGame())
     _setupDatabase('reaction.db')
 

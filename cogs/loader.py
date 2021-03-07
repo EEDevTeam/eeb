@@ -204,17 +204,6 @@ class Admin(commands.Cog):
 
         await ctx.send('\n'.join(f'{status}: `{module}`' for status, module in statuses))
 
-    @commands.command(hidden=True)
-    async def update(self, ctx, *, module):
-        """Update Bot"""
-        if module == 'github':
-            await ctx.send('Trying to get update from github')
-            await ctx.send('Fail to clone from https://github.com/TimoRams/discordbot/cogs')
-        if module == 'files':
-            await ctx.send('Trying to get update from discordbot/update/files*')
-            await ctx.send('Fail to update from file (Error no file found `{module}`)')
-        else:
-            await ctx.send(f'No Command named {module}')
 
 
 

@@ -7,7 +7,6 @@ __cogs__ = [
     'cogs.help',
     'cogs.loader',
     'cogs.info',
-    'cogs.community',
     'cogs.music',
     'cogs.chatbotai',
     'cogs.botsetup'
