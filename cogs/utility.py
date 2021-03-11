@@ -368,7 +368,7 @@ class utility(commands.Cog):
 
         :source newdcbot
         '''
-        source_url = '<:github:818032831582175243> https://github.com/TimoRams/newdcbot'
+        source_url = '<:github:818032831582175243> https://github.com/EebDevelopment/eeb'
         if command is None:
             await ctx.send(source_url)
             return
