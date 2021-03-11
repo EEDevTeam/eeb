@@ -286,3 +286,4 @@ async def dev(ctx):
 if __name__ == '__main__':
     bot.run(loadconfig.__token__)
 # NzIwNjk4MDgxMTgzNjYyMTMy.XuJwZA.toHSDqyt8mny0OdE92titM_Jl7w
+
