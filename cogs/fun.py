@@ -251,6 +251,15 @@ class fun(commands.Cog):
         msg = f'{random.choice(emojis)} {random.choice(puns)}'
         await ctx.send(msg)
 
+    @commands.command(aliases=['bs'])
+    async def blueshell(self, ctx):
+        '''fuck???'''
+        await ctx.send('<:blueshell:744304518950551694>')
+
+    @commands.command(aliases=['pp'])
+    async def proper(self, ctx):
+        '''propper'''
+        await ctx.send('https://www.brandslex.de/img/logos/xl/m/logo-mr-proper-01.png')
 
 def setup(bot):
     bot.add_cog(fun(bot))

@@ -285,28 +285,28 @@ class utility(commands.Cog):
 
     @commands.command(pass_context=True, aliases=['serverinfo', 'guild', 'membercount'])
     async def server(self, ctx):
-        '''Gibt Informationen über die derzeitge Discord Guild aus'''
-        emojis = self._getEmojis(ctx.guild.emojis)
-        #print(emojis)
-        roles = self._getRoles(ctx.guild.roles)
-        embed = discord.Embed(color=0xf1c40f) #Golden
-        embed.set_thumbnail(url=ctx.guild.icon_url)
-        embed.set_footer(text='Es können evtl. Emojis fehlen')
-        embed.add_field(name='Name', value=ctx.guild.name, inline=True)
-        embed.add_field(name='ID', value=ctx.guild.id, inline=True)
-        embed.add_field(name='Besitzer', value=ctx.guild.owner, inline=True)
-        embed.add_field(name='Region', value=ctx.guild.region, inline=True)
-        embed.add_field(name='Mitglieder', value=ctx.guild.member_count, inline=True)
-        embed.add_field(name='Erstellt am', value=ctx.guild.created_at.strftime('%d.%m.%Y'), inline=True)
-        if ctx.guild.system_channel:
-            embed.add_field(name='Standard Channel', value=f'#{ctx.guild.system_channel}', inline=True)
-        embed.add_field(name='AFK Voice Timeout', value=f'{int(ctx.guild.afk_timeout / 60)} min', inline=True)
-        embed.add_field(name='Guild Shard', value=ctx.guild.shard_id, inline=True)
-        embed.add_field(name='Rollen', value=roles, inline=True)
-        embed.add_field(name='Custom Emojis', value=emojis, inline=True)
-        await ctx.send(embed=embed)
+        async def server(self, ctx):
+            '''Gibt Informationen über die derzeitge Discord Guild aus'''
+            emojis = self._getEmojis(ctx.guild.emojis)
+            # print(emojis)
+            roles = self._getRoles(ctx.guild.roles)
+            embed = discord.Embed(color=0xf1c40f)  # Golden
+            embed.set_thumbnail(url=ctx.guild.icon_url)
+            embed.set_footer(text='Es können evtl. Emojis fehlen')
+            embed.add_field(name='Name', value=ctx.guild.name, inline=True)
+            embed.add_field(name='ID', value=ctx.guild.id, inline=True)
+            embed.add_field(name='Besitzer', value=ctx.guild.owner, inline=True)
+            embed.add_field(name='Region', value=ctx.guild.region, inline=True)
+            embed.add_field(name='Mitglieder', value=ctx.guild.member_count, inline=True)
+            embed.add_field(name='Erstellt am', value=ctx.guild.created_at.strftime('%d.%m.%Y'), inline=True)
+            if ctx.guild.system_channel:
+                embed.add_field(name='Standard Channel', value=f'#{ctx.guild.system_channel}', inline=True)
+            embed.add_field(name='AFK Voice Timeout', value=f'{int(ctx.guild.afk_timeout / 60)} min', inline=True)
+            embed.add_field(name='Guild Shard', value=ctx.guild.shard_id, inline=True)
+            embed.add_field(name='Rollen', value=roles, inline=True)
+            embed.add_field(name='Custom Emojis', value=emojis, inline=True)
+            await ctx.send(embed=embed)
 
-    #Shameful copied from https://github.com/Rapptz/RoboDanny/blob/b513a32dfbd4fdbd910f7f56d88d1d012ab44826/cogs/meta.py
     @commands.command(aliases=['reminder'])
     @commands.cooldown(1, 30, commands.cooldowns.BucketType.user)
     async def timer(self, ctx, time : TimeParser, *, message=''):

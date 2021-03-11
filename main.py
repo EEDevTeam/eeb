@@ -5,6 +5,7 @@ import random
 import sqlite3
 import traceback
 import time
+from itertools import cycle
 import datetime
 import sys
 import os
@@ -15,10 +16,10 @@ from collections import Counter
 from pytz import timezone
 from discord.ext import commands
 from discord.ext.commands import Bot
-import loadconfig
 import aiohttp
+import loadconfig
 
-__version__ = 'Beta 1'
+
 
 
 
@@ -26,11 +27,21 @@ def get_prefix(bot, message):
     with open('database/prefixes.json', 'r') as f:
         prefixes = json.load(f)
         bot.devs = [
-            649332192119357460,  # Toxy
+            649332192119357460,  # Toxy dev
             455802857149693952   #TimoRams
         ]
 
-    return prefixes[str(message.guild.id)]
+        if str(message.guild.id) in f:
+            return prefixes[str(message.guild.id)]
+        else:
+            with open('database/prefixes.json', 'r') as f:
+                prefixes = json.load(f)
+
+            prefixes[str(message.guild.id)] = '_'
+
+            with open('database/prefixes.json', 'w') as f:
+                json.dump(prefixes, f, indent=4)
+        return prefixes[str(message.guild.id)]
 
 
 
@@ -90,7 +101,7 @@ async def on_ready():
     print(f'Bot-ID: {bot.user.id}')
     print(f'Dev Mode: {bot.dev}')
     print(f'Discord Version: {discord.__version__}')
-    print(f'Bot Version: {__version__}')
+    print(f'Bot Version: {loadconfig.__version__}')
     bot.AppInfo = await bot.application_info()
     print(f'Owner: {bot.AppInfo.owner}')
     print('------')
@@ -101,8 +112,9 @@ async def on_ready():
             print(f'Couldn\'t load cog {cog}')
     bot.commands_used = Counter()
     bot.startTime = time.time()
-    bot.botVersion = __version__
-    bot.userAgentHeaders = {'User-Agent': f'linux:shinobu_discordbot:v{__version__} (by Der-Eddy)'}
+    bot.botVersion = loadconfig.__version__
+    bot.botsup = loadconfig.__server__
+    bot.userAgentHeaders = {'User-Agent': f'linux:shinobu_discordbot:v{loadconfig.__version__} (by Der-Eddy)'}
     bot.gamesLoop = asyncio.ensure_future(_randomGame())
     _setupDatabase('reaction.db')
 
@@ -140,11 +152,12 @@ async def on_message(message):
             await message.add_reaction('👀')  # :eyes:
     if 'timorams' in message.clean_content.lower():
         await message.add_reaction('👀')  # :eyes: bot see
-    if 'instagram.com' in message.clean_content.lower():
-        await message.add_reaction('💩')  # :poop:
+    if 'hahnsolo_ig' in message.clean_content.lower():
+        await message.channel.send('https://www.instagram.com/hahnsolo_ig/')
     await bot.process_commands(message)
     if 'eeb' in message.clean_content.lower():
         await message.add_reaction('👀')  # :eyes:
+
 
 
 
@@ -282,8 +295,11 @@ async def dev(ctx):
         return
     await ctx.send("Dev OK")
 
+@bot.command()
+async def id(ctx):
+    await ctx.send()
+
 
 if __name__ == '__main__':
     bot.run(loadconfig.__token__)
 # NzIwNjk4MDgxMTgzNjYyMTMy.XuJwZA.toHSDqyt8mny0OdE92titM_Jl7w
-

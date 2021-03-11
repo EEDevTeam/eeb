@@ -6,6 +6,7 @@ import os
 import re
 import sys
 import subprocess
+import loadconfig
 
 
 
@@ -108,31 +109,46 @@ class Admin(commands.Cog):
     async def load(self, ctx, *, module):
         """Loads a module."""
         try:
-            self.bot.load_extension(module)
+            self.bot.load_extension('cogs.'+module)
+        except commands.ExtensionError as e:
+            await ctx.send(f'{e.__class__.__name__}: {e}')
+        else:
+            await ctx.send('\N{OK HAND SIGN}'+'cogs.'+module+' loaded')
+
+    @commands.command(hidden=True)
+    async def loadall(self, ctx):
+        """Loads all"""
+        try:
+            for cog in loadconfig.__cogs__:
+                try:
+                    self.bot.load_extension(cog)
+                except Exception:
+                    print('OKAY')
         except commands.ExtensionError as e:
             await ctx.send(f'{e.__class__.__name__}: {e}')
         else:
             await ctx.send('\N{OK HAND SIGN}')
+            await ctx.send('All Cogs Loaded')
 
     @commands.command(hidden=True)
     async def unload(self, ctx, *, module):
         """Unloads a module."""
         try:
-            self.bot.unload_extension(module)
+            self.bot.unload_extension('cogs.'+module)
         except commands.ExtensionError as e:
             await ctx.send(f'{e.__class__.__name__}: {e}')
         else:
-            await ctx.send('\N{OK HAND SIGN}')
+            await ctx.send('\N{OK HAND SIGN}'+'cogs.'+module+' unloaded')
 
     @commands.group(name='reload', hidden=True, invoke_without_command=True)
     async def _reload(self, ctx, *, module):
         """Reloads a module."""
         try:
-            self.bot.reload_extension(module)
+            self.bot.reload_extension('cogs.'+module)
         except commands.ExtensionError as e:
             await ctx.send(f'{e.__class__.__name__}: {e}')
         else:
-            await ctx.send('\N{OK HAND SIGN}')
+            await ctx.send('\N{OK HAND SIGN}'+'cogs.'+module+' reloaded')
 
     _GIT_PULL_REGEX = re.compile(r'\s*(?P<filename>.+?)\s*\|\s*[0-9]+\s*[+-]+')
 
@@ -204,17 +220,6 @@ class Admin(commands.Cog):
 
         await ctx.send('\n'.join(f'{status}: `{module}`' for status, module in statuses))
 
-    @commands.command(hidden=True)
-    async def update(self, ctx, *, module):
-        """Update Bot"""
-        if module == 'github':
-            await ctx.send('Trying to get update from github')
-            await ctx.send('Fail to clone from https://github.com/TimoRams/discordbot/cogs')
-        if module == 'files':
-            await ctx.send('Trying to get update from discordbot/update/files*')
-            await ctx.send('Fail to update from file (Error no file found `{module}`)')
-        else:
-            await ctx.send(f'No Command named {module}')
 
 
 
