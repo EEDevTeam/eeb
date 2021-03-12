@@ -1,4 +1,4 @@
-2021-03-11 10:52:49,982:ERROR:discord.client: Attempting a reconnect in 30.53s
+2021-03-11 22:35:54,380:ERROR:discord.client: Attempting a reconnect in 0.14s
 Traceback (most recent call last):
   File "/home/timorams/PycharmProjects/eeb/venv/lib/python3.8/site-packages/aiohttp/connector.py", line 999, in _create_direct_connection
     hosts = await asyncio.shield(host_resolved)
@@ -38,34 +38,3 @@ Traceback (most recent call last):
   File "/home/timorams/PycharmProjects/eeb/venv/lib/python3.8/site-packages/aiohttp/connector.py", line 1011, in _create_direct_connection
     raise ClientConnectorError(req.connection_key, exc) from exc
 aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host discord.com:443 ssl:default [Temporary failure in name resolution]
-2021-03-11 10:52:53,784:WARNING:discord.voice_client: Could not connect to voice... Retrying...
-2021-03-11 10:58:49,198:ERROR:discord.player: Calling the after function failed.
-Traceback (most recent call last):
-  File "/home/timorams/PycharmProjects/eeb/venv/lib/python3.8/site-packages/discord/player.py", line 616, in _call_after
-    self.after(error)
-  File "/home/timorams/PycharmProjects/eeb/cogs/music.py", line 239, in play_next_song
-    raise VoiceError(str(error))
-cogs.music.VoiceError: [Errno 9] Bad file descriptor
-2021-03-11 11:03:46,675:ERROR:discord.player: Calling the after function failed.
-Traceback (most recent call last):
-  File "/home/timorams/PycharmProjects/eeb/venv/lib/python3.8/site-packages/discord/player.py", line 616, in _call_after
-    self.after(error)
-  File "/home/timorams/PycharmProjects/eeb/cogs/music.py", line 239, in play_next_song
-    raise VoiceError(str(error))
-cogs.music.VoiceError: [Errno 9] Bad file descriptor
-2021-03-11 11:09:43,569:ERROR:discord.player: Calling the after function failed.
-Traceback (most recent call last):
-  File "/home/timorams/PycharmProjects/eeb/venv/lib/python3.8/site-packages/discord/player.py", line 616, in _call_after
-    self.after(error)
-  File "/home/timorams/PycharmProjects/eeb/cogs/music.py", line 239, in play_next_song
-    raise VoiceError(str(error))
-cogs.music.VoiceError: [Errno 101] Network is unreachable
-2021-03-11 11:09:56,219:ERROR:discord.voice_client: Disconnected from voice... Reconnecting in 1.94s.
-Traceback (most recent call last):
-  File "/home/timorams/PycharmProjects/eeb/venv/lib/python3.8/site-packages/discord/voice_client.py", line 414, in poll_voice_ws
-    await self.ws.poll_event()
-  File "/home/timorams/PycharmProjects/eeb/venv/lib/python3.8/site-packages/discord/gateway.py", line 892, in poll_event
-    msg = await asyncio.wait_for(self.ws.receive(), timeout=30.0)
-  File "/usr/lib/python3.8/asyncio/tasks.py", line 498, in wait_for
-    raise exceptions.TimeoutError()
-asyncio.exceptions.TimeoutError

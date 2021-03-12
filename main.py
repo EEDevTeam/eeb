@@ -26,22 +26,18 @@ import loadconfig
 def get_prefix(bot, message):
     with open('database/prefixes.json', 'r') as f:
         prefixes = json.load(f)
-        bot.devs = [
-            649332192119357460,  # Toxy dev
-            455802857149693952   #TimoRams
-        ]
-
-        if str(message.guild.id) in f:
-            return prefixes[str(message.guild.id)]
+        serverid = str(message.guild.id)
+        if serverid in prefixes:
+            return prefixes[serverid]
         else:
             with open('database/prefixes.json', 'r') as f:
                 prefixes = json.load(f)
 
-            prefixes[str(message.guild.id)] = '_'
+            prefixes[serverid] = '_'
 
             with open('database/prefixes.json', 'w') as f:
                 json.dump(prefixes, f, indent=4)
-        return prefixes[str(message.guild.id)]
+                return prefixes[serverid]
 
 
 
@@ -117,6 +113,10 @@ async def on_ready():
     bot.userAgentHeaders = {'User-Agent': f'linux:shinobu_discordbot:v{loadconfig.__version__} (by Der-Eddy)'}
     bot.gamesLoop = asyncio.ensure_future(_randomGame())
     _setupDatabase('reaction.db')
+    bot.devs = [
+        649332192119357460,  # Toxy dev
+        455802857149693952  # TimoRams
+    ]
 
 
 @bot.event

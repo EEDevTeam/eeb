@@ -22,14 +22,18 @@ class botsetup(commands.Cog):
     @commands.has_permissions(administrator=True)
     async def setprefix(self, ctx, prefix):
         '''Endert den bot Prefix für deinen Server (admin ONLY)'''
-        with open('database/prefixes.json', 'r') as f:
-            prefixes = json.load(f)
+        if len(prefix) < 5:
+            with open('database/prefixes.json', 'r') as f:
+                prefixes = json.load(f)
 
-        prefixes[str(ctx.guild.id)] = prefix
+            prefixes[str(ctx.guild.id)] = prefix
 
-        with open('database/prefixes.json', 'w') as f:
-            json.dump(prefixes, f, indent=4)
-        await ctx.send(f'Prefix set to {prefix}')
+            with open('database/prefixes.json', 'w') as f:
+                json.dump(prefixes, f, indent=4)
+            await ctx.send(f'Prefix set to {prefix}')
+        else:
+            await ctx.send(f'The Prefix: {prefix} is to long!')
+
 
     @commands.command()
     @commands.has_permissions(administrator=True)
