@@ -152,10 +152,10 @@ class utility(commands.Cog):
         await ctx.author.send("Here is your password" + pwdm)
 
     @commands.command(pass_context=True, aliases=['qrcode'])
-    async def qr(self, ctx, qrlink):
+    async def qr(self, ctx, *, qrlink):
         '''Erstellt einen qrcode mit link'''
         url = pyqrcode.create(qrlink)
-        url.png("temp/myqr.png", scale=8)
+        url.png("temp/myqr.png", scale=14)
         embed = discord.Embed(title="QrCode", timestamp=ctx.message.created_at, description=qrlink, color=0x4a4a4a)
         file = discord.File("temp/myqr.png", filename="myqr.png")
         embed.set_image(url="attachment://myqr.png")
