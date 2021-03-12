@@ -12,8 +12,12 @@ import discord
 from discord.ext import commands
 from PIL import Image, ImageDraw, ImageFont
 import pyqrcode
+import random
 import png
 from pyqrcode import QRCode
+
+
+
 
 #Stolen from https://github.com/Rapptz/RoboDanny/blob/b513a32dfbd4fdbd910f7f56d88d1d012ab44826/cogs/meta.py
 class TimeParser:
@@ -83,6 +87,11 @@ class Plural:
             return '%s %sn' % (v, self.name)
         return '%s %s' % (v, self.name)
 
+
+
+
+
+
 class utility(commands.Cog):
     '''Allgemeine/nützliche Befehle welche nirgendwo sonst reinpassen'''
 
@@ -91,6 +100,8 @@ class utility(commands.Cog):
 
     async def cog_command_error(self, ctx, error):
         print('Error in {0.command.qualified_name}: {1}'.format(ctx, error))
+
+
 
     @staticmethod
     def _newImage(width, height, color):
@@ -116,6 +127,29 @@ class utility(commands.Cog):
             return 'None'
         else:
             return string[:1000] #The maximum allowed charcter amount for embed fields
+
+    @commands.command(aliases=['pw'])
+    async def password(self, ctx, pwl):
+        def passwort(länge=16):
+            buchstaben = "abcdefghijklmnopqrstuvwxyz"
+            ziffern = "0123456789"
+            sonderzeichen = "!$%&.#"
+            zeichen = buchstaben + buchstaben.upper() + \
+                      ziffern + sonderzeichen
+            passwort = ""
+            for i in range(länge):
+                passwort += random.choice(zeichen)
+            return passwort
+
+        print("Langes Passwort: ", passwort())
+        print("Strukturiertes Passwort: ",
+              passwort(5) + "-" + passwort(5) + "-" +
+              passwort(5))
+
+        pwdm = passwort(pwl)
+        print(pwdm)
+        await ctx.send(f'I send you a dm with a password that with a length of {pwl} !')
+        await ctx.author.send("Here is your password" + pwdm)
 
     @commands.command(pass_context=True, aliases=['qrcode'])
     async def qr(self, ctx, qrlink):
