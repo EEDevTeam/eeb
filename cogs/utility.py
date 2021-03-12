@@ -117,7 +117,7 @@ class utility(commands.Cog):
         else:
             return string[:1000] #The maximum allowed charcter amount for embed fields
 
-    @commands.command(pass_context=True)
+    @commands.command(pass_context=True, aliases=['qrcode'])
     async def qr(self, ctx, qrlink):
         '''Erstellt einen qrcode mit link'''
         url = pyqrcode.create(qrlink)
