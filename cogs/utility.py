@@ -11,6 +11,9 @@ import aiohttp
 import discord
 from discord.ext import commands
 from PIL import Image, ImageDraw, ImageFont
+import pyqrcode
+import png
+from pyqrcode import QRCode
 
 #Stolen from https://github.com/Rapptz/RoboDanny/blob/b513a32dfbd4fdbd910f7f56d88d1d012ab44826/cogs/meta.py
 class TimeParser:
@@ -113,6 +116,17 @@ class utility(commands.Cog):
             return 'None'
         else:
             return string[:1000] #The maximum allowed charcter amount for embed fields
+
+    @commands.command(pass_context=True)
+    async def qr(self, ctx, qrlink):
+        '''Erstellt einen qrcode mit link'''
+        url = pyqrcode.create(qrlink)
+        url.png("temp/myqr.png", scale=8)
+        embed = discord.Embed(title="QrCode", timestamp=ctx.message.created_at, description=qrlink, color=0x4a4a4a)
+        file = discord.File("temp/myqr.png", filename="myqr.png")
+        embed.set_image(url="attachment://myqr.png")
+        embed.set_footer(text=f"Angefragt von {ctx.author}", icon_url=ctx.author.avatar_url)
+        await ctx.send(file=file, embed=embed)
 
     @commands.command(aliases=['uptime', 'up'])
     async def status(self, ctx):
