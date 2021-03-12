@@ -132,7 +132,7 @@ class fun(commands.Cog):
     async def _8ball(self, ctx, *, question):
         '''8ball Game'''
         avatar = f"https://cdn.discordapp.com/avatars/{ctx.author.id}/{ctx.author.avatar}.png?size=1024"
-        embed = discord.Embed(colour=discord.Colour(0x4a4a4a), url="https://discordapp.com")
+        embed = discord.Embed(timestamp=ctx.message.created_at, colour=discord.Colour(0x4a4a4a), url="https://discordapp.com")
 
         embed.set_thumbnail(url="https://i.imgur.com/akdtE4H.gif")
         embed.set_author(name="8Ball", url="https://wikipedia.org/wiki/Eight-ball")
