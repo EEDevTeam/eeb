@@ -18,6 +18,7 @@ from discord.ext import commands
 from discord.ext.commands import Bot
 import aiohttp
 import loadconfig
+import gtts
 
 
 
@@ -113,10 +114,7 @@ async def on_ready():
     bot.userAgentHeaders = {'User-Agent': f'linux:shinobu_discordbot:v{loadconfig.__version__} (by Der-Eddy)'}
     bot.gamesLoop = asyncio.ensure_future(_randomGame())
     _setupDatabase('reaction.db')
-    bot.devs = [
-        649332192119357460,  # Toxy dev
-        455802857149693952  # TimoRams
-    ]
+    bot.devs = loadconfig.__devs__
 
 
 @bot.event
@@ -275,6 +273,8 @@ async def on_command_error(error, ctx):
                 await bot.AppInfo.owner.send(embed=embed)
             except:
                 pass
+
+
 
 
 @bot.command(hidden=True, aliases=['quit_backup'])

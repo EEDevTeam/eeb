@@ -1,4 +1,4 @@
-2021-03-12 12:52:31,272:ERROR:discord.client: Attempting a reconnect in 119.89s
+2021-03-16 19:22:19,132:ERROR:discord.client: Attempting a reconnect in 28.31s
 Traceback (most recent call last):
   File "/home/timorams/PycharmProjects/neweeb/venv/lib/python3.8/site-packages/aiohttp/connector.py", line 999, in _create_direct_connection
     hosts = await asyncio.shield(host_resolved)
@@ -38,3 +38,17 @@ Traceback (most recent call last):
   File "/home/timorams/PycharmProjects/neweeb/venv/lib/python3.8/site-packages/aiohttp/connector.py", line 1011, in _create_direct_connection
     raise ClientConnectorError(req.connection_key, exc) from exc
 aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host discord.com:443 ssl:default [Temporary failure in name resolution]
+2021-04-15 00:19:03,085:ERROR:discord.player: Calling the after function failed.
+Traceback (most recent call last):
+  File "/home/timorams/PycharmProjects/neweeb/venv/lib/python3.8/site-packages/discord/player.py", line 616, in _call_after
+    self.after(error)
+  File "/home/timorams/PycharmProjects/neweeb/cogs/music.py", line 239, in play_next_song
+    raise VoiceError(str(error))
+cogs.music.VoiceError: [Errno 9] Bad file descriptor
+2021-04-15 00:52:15,843:ERROR:discord.player: Calling the after function failed.
+Traceback (most recent call last):
+  File "/home/timorams/PycharmProjects/neweeb/venv/lib/python3.8/site-packages/discord/player.py", line 616, in _call_after
+    self.after(error)
+  File "/home/timorams/PycharmProjects/neweeb/cogs/music.py", line 239, in play_next_song
+    raise VoiceError(str(error))
+cogs.music.VoiceError: 'NoneType' object has no attribute 'read'

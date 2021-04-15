@@ -4,6 +4,10 @@ configFile = os.path.join('.', 'config', 'config.py')
 
 if os.path.isfile(configFile):
     try:
+        from config.config import __devs__
+    except ImportError:
+        raise Exception('__devs__ variable MUST be set ')
+    try:
         from config.config import __server__
     except ImportError:
         raise Exception('__server__ variable MUST be set ')
@@ -48,13 +52,14 @@ else:
     __token__ = os.environ.get('DISCORD_TOKEN')
     if __token__ == '':
         raise Exception('DISCORD_TOKEN environment variable MUST be set ')
-    __prefix__ = os.environ.get('DISCORD_PREFIX', ':')
+    __prefix__ = os.environ.get('DISCORD_PREFIX', '_')
     __botserverid__ = int(os.environ.get('DISCORD_BOTSERVERID', 0))
     __kawaiichannel__ = int(os.environ.get('DISCORD_KAWAIICHANNEL', 0))
     __greetmsg__ = os.environ.get('DISCORD_GREETMSG', '')
     __leavemsg__ = os.environ.get('DISCORD_LEAVEMSG', '')
     __timezone__ = os.environ.get('DISCORD_TIMEZONE', 'Europe/London')
     ___selfassignrole__ = os.environ.get('DISCORD_SELFASSIGNROLE', 'NSFW')
+
 
 from config.games import __games__, __gamesTimer__
 from config.cogs import __cogs__
